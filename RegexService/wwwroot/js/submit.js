@@ -1,5 +1,4 @@
 ﻿"use strict";
-//window.alert("You are matched with " + getParameterByName("matchedWith") + ".\r\n You are the " + String(getParameterByName("messageReceived")));
 
 if ("responder".localeCompare(String(getParameterByName("messageReceived"))) == 0) {
     document.getElementById("question-portal").innerHTML = "<p>Waiting for " + getParameterByName("matchedWith") + " to ask the problem";
@@ -13,17 +12,16 @@ function validateForm() {
     if (strval == "") {
         window.alert("Please enter a regex string");
     }
-    if (document.getElementById("match1").value == "") {
-        window.alert("Please enter a string which matches the regex");
-    }
-    if (document.getElementById("match2").value == "") {
-        window.alert("Please enter a string which matches the regex");
-    }
-    if (document.getElementById("nomatch1").value == "") {
-        window.alert("Please enter a string which does not match the regex");
-    }
-    if (document.getElementById("nomatch2").value == "") {
-        window.alert("Please enter a string which does not match the regex");
+    var unorderListMatchString = document.getElementById("matchStrings");
+    var totalStringsYet = unorderListMatchString.children.length;
+
+    for (var i = 1; i <= totalStringsYet; i++) {
+        if (document.getElementById("match" + String(i)).value == "") {
+            window.alert("Please enter a string which matches the regex");
+        }
+        if (document.getElementById("nomatch" + String(i)).value == "") {
+            window.alert("Please enter a string which does not match the regex");
+        }
     }
 
     var regex;
@@ -33,21 +31,18 @@ function validateForm() {
     catch (err) {
         window.alert("Bad Regex, " + err);
     }
-    var m1 = String(document.getElementById("match1").value);
-    var m2 = String(document.getElementById("match2").value);
-    var um1 = String(document.getElementById("nomatch1").value);
-    var um2 = String(document.getElementById("nomatch2").value);
-    if (m1.search(strval) == -1) {
-        alert("Search string 1 does not match with regex");
-    }
-    if (m2.search(strval) == -1) {
-        alert("Search string 2 does not match with regex");
-    }
-    if (um1.search(strval) != -1) {
-        alert("One of the strings should not match with regex but matches");
-    }
-    if (um2.search(strval) != -1) {
-        alert("One of the strings should not match with regex but matches");
+
+    for (var i = 1; i <= totalStringsYet; i++) {
+        var m = String(document.getElementById("match" + String(i)).value);
+        var um = String(document.getElementById("nomatch" + String(i)).value);
+
+        if (m.search(strval) == -1) {
+            alert("Search string " + i + " does not match with regex");
+        }
+
+        if (um.search(strval) != -1) {
+            alert("One of the strings should not match with regex but matches");
+        }
     }
 }
 
@@ -58,15 +53,47 @@ connection.on("ReceiveMessage", function (user, message) {
         var matcherStrings = msg.matchString;
         var nomatcherStrings = msg.noMatchString;
         window.regexString = String(msg.regexString);
-        document.getElementById("matcher1").innerText = matcherStrings[0];
-        document.getElementById("matcher2").innerText = matcherStrings[1];
-        document.getElementById("nomatcher1").innerText = nomatcherStrings[0];
-        document.getElementById("nomatcher2").innerText = nomatcherStrings[1];
+        var unorderListMatchString = document.getElementById("matcherStrings");
+        var unorderListnoMatchString = document.getElementById("nomatcherStrings");
+        var totalStringsYet = unorderListMatchString.children.length;
+
+        for (var i = 1; i <= matcherStrings.length;i++) {
+            if (i > totalStringsYet) {
+                var li = document.createElement("li");
+                var x = document.createTextNode(matcherStrings[i-1]);
+                x.id = "matcher" + String(totalStringsYet + 1);
+                li.appendChild(x);
+                unorderListMatchString.appendChild(li);
+
+                li = document.createElement("li");
+                x = document.createTextNode(nomatcherStrings[i - 1]);
+                x.id = "nomatcher" + String(totalStringsYet + 1);
+                li.appendChild(x);
+                unorderListnoMatchString.appendChild(li);
+            }
+        }
+
         document.getElementById("question-display").style.visibility = "visible";
         document.getElementById("question-portal").style.display = "none";
     }
     else if (msgtype == "hint") {
         alert("Player " + user + " needs more strings to guess");
+        var unorderListMatchString = document.getElementById("matchStrings");
+        var totalStringsYet = unorderListMatchString.children.length;
+        var li = document.createElement("li");
+        var x = document.createElement("INPUT");
+        x.setAttribute("id", "match" + String(totalStringsYet + 1))
+        x.setAttribute("type", "text");   
+        li.appendChild(x);
+        unorderListMatchString.appendChild(li);
+
+        var unorderListnoMatchString = document.getElementById("nomatchStrings");
+        li = document.createElement("li");
+        x = document.createElement("INPUT");
+        x.setAttribute("id", "nomatch" + String(totalStringsYet + 1))
+        x.setAttribute("type", "text");
+        li.appendChild(x);
+        unorderListnoMatchString.appendChild(li);
     }
 });
 
@@ -130,8 +157,16 @@ document.getElementById("Hint").addEventListener("click", function (event) {
 document.getElementById("SubmitRegex").addEventListener("click", function (event) {
     var strval = document.getElementById("RegexString").value;
     validateForm();
-    var matchStrings = [document.getElementById("match1").value, document.getElementById("match2").value];
-    var nomatchStrings = [document.getElementById("nomatch1").value, document.getElementById("nomatch2").value];
+    var unorderListMatchString = document.getElementById("matchStrings");
+    var totalStringsYet = unorderListMatchString.children.length;
+
+    var matchStrings = new Array();
+    var nomatchStrings = new Array();
+    for (var i = 1; i <= totalStringsYet; i++) {
+        matchStrings.push(document.getElementById("match" + String(i)).value);
+        nomatchStrings.push(document.getElementById("nomatch" + String(i)).value);
+    }
+
     var requestJson = new Object();
     requestJson.regexString = strval;
     requestJson.matchString = matchStrings;

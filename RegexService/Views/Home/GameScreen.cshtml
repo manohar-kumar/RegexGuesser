@@ -6,12 +6,26 @@
 <div id="question-portal">
     <p>Input your regex as a string</p>
     <input type="text" id="RegexString" required />
-    <p>Input two strings matching the regex</p>
-    <input type="text" id="match1" required />
-    <input type="text" id="match2" required />
-    <p>Input two strings that do not match your regex</p>
-    <input type="text" id="nomatch1" required />
-    <input type="text" id="nomatch2" required />
+    <br />
+    <p>Input strings matching the regex</p>
+    <ul id="matchStrings">
+        <li>
+            <input type="text" id="match1" required />
+        </li>
+        <li>
+            <input type="text" id="match2" required />
+        </li>
+    </ul>
+    <br />
+    <p>Input strings that do not match your regex</p>
+    <ul id="nomatchStrings">
+        <li>
+            <input type="text" id="nomatch1" required />
+        </li>
+        <li>
+            <input type="text" id="nomatch2" required />
+        </li>
+    </ul>
     <p>
         <button type="button" id="SubmitRegex">
             Challenge
@@ -21,13 +35,9 @@
 
 <div id="question-display">
     <p>Below are the strings that match with the asked regex</p>
-    <p id="matcher1"></p>
-    <p id="matcher2"></p>
-    <br />
+    <ul id="matcherStrings"></ul>
     <p>Below are the strings that do not match with the asked regex</p>
-    <p id="nomatcher1"></p>
-    <p id="nomatcher2"></p>
-    <br />
+    <ul id="nomatcherStrings"></ul>
 
     <p>
         Enter your guess
@@ -45,5 +55,41 @@
         </button>
     </p>
 </div>
+<style>
+    *,
+    :before,
+    :after {
+        box-sizing: border-box;
+    }
+    ul {
+        list-style-type: none
+    }
+    input {
+        background: none;
+        color: #807e7e;
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 320px;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #c6c6c6;
+    }
+    p {
+        border: 2px solid #0066FF;
+        background-color: #6eb5a9;
+        padding: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    #RegexString
+    {
+        position: relative;
+        margin-left:50px;
+        margin-top:20px;
+    }
+</style>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/submit.js"></script>
