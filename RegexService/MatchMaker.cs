@@ -19,12 +19,7 @@ namespace RegexService
 
         public static MatchMaker Instance { get { return lazy.Value; } }
 
-        private static Queue<string> AllUsersWaiting;
-
-        public MatchMaker()
-        {
-            AllUsersWaiting = new Queue<string>();
-        }
+        private static Queue<string> AllUsersWaiting = new Queue<string>();
 
         public static MatchResponse GetMeAGame(string name)
         {
