@@ -21,6 +21,8 @@ namespace RegexService
 
         private static Queue<string> AllUsersWaiting = new Queue<string>();
 
+        private static Dictionary<string, string> matchedPlayers = new Dictionary<string, string>();
+
         public static MatchResponse GetMeAGame(string name)
         {
             lock (lockobject)
@@ -36,6 +38,8 @@ namespace RegexService
                 else
                 {
                     string matchedPerson = AllUsersWaiting.Dequeue();
+                    matchedPlayers.Add(matchedPerson, name);
+                    matchedPlayers.Add(name, matchedPerson);
                     return new MatchResponse
                     {
                         matched = true,
@@ -43,6 +47,11 @@ namespace RegexService
                     };
                 }
             }
+        }
+
+        public static string GetMatchedPlayer(string user)
+        {
+            return matchedPlayers[user];
         }
     }
 }

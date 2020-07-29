@@ -4,7 +4,7 @@
 
 
 <div id="question-portal">
-    <p>Input your regex</p>
+    <p>Input your regex as a string</p>
     <input type="text" id="RegexString" required />
     <p>Input two strings matching the regex</p>
     <input type="text" id="match1" required />
@@ -15,6 +15,33 @@
     <p>
         <button type="button" id="SubmitRegex">
             Challenge
+        </button>
+    </p>
+</div>
+
+<div id="question-display">
+    <p>Below are the strings that match with the asked regex</p>
+    <p id="matcher1"></p>
+    <p id="matcher2"></p>
+    <br />
+    <p>Below are the strings that do not match with the asked regex</p>
+    <p id="nomatcher1"></p>
+    <p id="nomatcher2"></p>
+    <br />
+
+    <p>
+        Enter your guess
+        <input type="text" id="RegexAnswer" required />
+    </p>
+    <p>
+        <button type="button" id="SubmitAnswer">
+            Guess
+        </button>
+    </p>
+    <br />
+    <p>
+        <button type="button" id="Hint">
+            Ask For More Strings
         </button>
     </p>
 </div>
