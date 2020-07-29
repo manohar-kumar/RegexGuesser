@@ -41,19 +41,18 @@
 
     <p>
         Enter your guess
-        <input type="text" id="RegexAnswer" required />
     </p>
+    <input type="text" id="RegexAnswer" required />
+
     <p>
         <button type="button" id="SubmitAnswer">
             Guess
         </button>
     </p>
     <br />
-    <p>
         <button type="button" id="Hint">
-            Ask For More Strings
+            Need Help, Ask For More Strings
         </button>
-    </p>
 </div>
 <style>
     *,
@@ -83,12 +82,25 @@
         margin-bottom: 5px;
         margin-left: 20px;
         margin-right: 20px;
+        font-family: Verdana;
+        font-size:16px;
     }
-    #RegexString
+    #RegexString,#RegexAnswer
     {
         position: relative;
         margin-left:50px;
         margin-top:20px;
+    }
+
+    #Hint {
+        position: relative;
+        margin-left: 100px;
+        background-color: #bbbd4d;
+        font-size: 18px;
+    }
+    #SubmitRegex{
+        font-style:italic;
+        font-weight:bold;
     }
 </style>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>

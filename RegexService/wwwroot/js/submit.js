@@ -11,6 +11,7 @@ function validateForm() {
     var strval = document.getElementById("RegexString").value;
     if (strval == "") {
         window.alert("Please enter a regex string");
+        throw new error("No regex string entered");
     }
     var unorderListMatchString = document.getElementById("matchStrings");
     var totalStringsYet = unorderListMatchString.children.length;
@@ -18,9 +19,11 @@ function validateForm() {
     for (var i = 1; i <= totalStringsYet; i++) {
         if (document.getElementById("match" + String(i)).value == "") {
             window.alert("Please enter a string which matches the regex");
+            throw new error("A string which matches the regex has not been entered");
         }
         if (document.getElementById("nomatch" + String(i)).value == "") {
             window.alert("Please enter a string which does not match the regex");
+            throw new error("A string which does not match the regex has not been entered");
         }
     }
 
@@ -38,10 +41,12 @@ function validateForm() {
 
         if (m.search(strval) == -1) {
             alert("Search string " + i + " does not match with regex");
+            throw new error("Hint string should match with regex");
         }
 
         if (um.search(strval) != -1) {
             alert("One of the strings should not match with regex but matches");
+            throw new error("One of the strings should not match with regex but matches");
         }
     }
 }

@@ -61,7 +61,7 @@ using RegexService.Models;
             WriteLiteral("\r\n\r\n<div class=\"row\" id=\"global-div\">\r\n    <input type=\"text\" id=\"playerName\" placeholder=\"Enter your name\" />\r\n    <button type=\"button\" id=\"queueButton\">Queue for a game</button>\r\n</div>\r\n\r\n");
             EndContext();
             BeginContext(237, 60, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8202cdc84877461da86764c605ae3232", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eaf69edc7ba04fe5a900bbea2db156c8", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -79,7 +79,7 @@ using RegexService.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(299, 36, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "27f608c4fc814bbca3f07de0514c2081", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e1984af744304b18ae7608ccab95947f", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
