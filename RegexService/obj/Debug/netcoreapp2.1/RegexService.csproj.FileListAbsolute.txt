@@ -14,7 +14,6 @@ C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\RegexService.TagHelpers.input.cache
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\RegexService.TagHelpers.output.cache
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\RegexService.RazorCoreGenerate.cache
-C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
@@ -32,3 +31,4 @@ C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\RegexService.csproj.CopyComplete
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\GameScreen.g.cshtml.cs
+C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\GamePlay.g.cshtml.cs

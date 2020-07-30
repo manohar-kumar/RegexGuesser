@@ -4,26 +4,26 @@
 
 
 <div id="question-portal">
-    <p>Input your regex as a string</p>
-    <input type="text" id="RegexString" required />
+    <p>Input your regex as a string below</p>
+    <input type="text" id="RegexString" />
     <br />
     <p>Input strings matching the regex</p>
     <ul id="matchStrings">
         <li>
-            <input type="text" id="match1" required />
+            <input type="text" id="match1" />
         </li>
         <li>
-            <input type="text" id="match2" required />
+            <input type="text" id="match2" />
         </li>
     </ul>
     <br />
     <p>Input strings that do not match your regex</p>
     <ul id="nomatchStrings">
         <li>
-            <input type="text" id="nomatch1" required />
+            <input type="text" id="nomatch1" />
         </li>
         <li>
-            <input type="text" id="nomatch2" required />
+            <input type="text" id="nomatch2" />
         </li>
     </ul>
     <p>
@@ -54,6 +54,13 @@
             Need Help, Ask For More Strings
         </button>
 </div>
+<div id="Result" style="font-size:larger;color:burlywood;background-color:dimgray;font-weight:bold;position:relative;margin-left:30px;margin-top:10px;display:none">
+    <p id="Winner" style="position:relative; margin-left:30px;">You Guessed it Right.</p>
+    <p id="Points" style="position:relative; margin-left:30px;"></p>
+</div>
+<div id="btnholder">
+    <button id="Reset">RESET</button>
+</div>
 <style>
     *,
     :before,
@@ -74,7 +81,18 @@
         border-radius: 0;
         border-bottom: 1px solid #c6c6c6;
     }
-    p {
+    #btnholder{
+        position:relative;
+    }
+    #Reset{
+        position:absolute;
+        right:20px;
+        font-size:larger;
+        border:thick;
+        background-color:dimgray;
+        color:antiquewhite;
+    }
+    #question-portal p, #question-display p {
         border: 2px solid #0066FF;
         background-color: #6eb5a9;
         padding: 5px;
@@ -101,6 +119,10 @@
     #SubmitRegex{
         font-style:italic;
         font-weight:bold;
+    }
+    #matcherStrings, #nomatcherStrings{
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:large;
     }
 </style>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>

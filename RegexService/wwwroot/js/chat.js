@@ -13,8 +13,29 @@ document.getElementById("queueButton").disabled = true;
 
 
 connection.on("ReceiveMessage", function (user, message) {
-    connection.stop();
-    window.location.href = "Home/GameScreen?matchedWith=" + user + "&messageReceived=" + message;
+    var msg = JSON.parse(message);
+    var msgtype = msg.type;
+    if (msgtype == "queue") {
+        connection.stop();
+        window.location.href = "Home/GameScreen?matchedWith=" + user + "&messageReceived=" + msg.playerType;
+    }
+    else if (msgtype == "NameApproval") {
+        if (msg.approval == "true") {
+            document.getElementById("challengeAccept").style.display = "block";
+            document.getElementById("challengeAccept").innerText = "Waiting for someone to accept the challenge";
+
+            var buttons = document.getElementsByTagName("button");
+            var btn;
+            for (btn = 1; btn <= buttons.length;btn++) {
+                buttons[btn].style.display = "none";;
+            }
+        }
+        else {
+            document.getElementById("challengeAccept").style.display = "block";
+            document.getElementById("challengeAccept").innerText = "This name is taken. Please select some other name";
+        }
+    }
+    
 });
 
 connection.start().then(function () {

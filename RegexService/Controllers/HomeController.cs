@@ -31,9 +31,9 @@ namespace RegexService.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult GamePlay()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Instructions";
 
             return View();
         }
@@ -47,7 +47,7 @@ namespace RegexService.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Manohar Kumar";
 
             return View();
         }

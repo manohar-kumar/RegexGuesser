@@ -3,6 +3,9 @@
 if ("responder".localeCompare(String(getParameterByName("messageReceived"))) == 0) {
     document.getElementById("question-portal").innerHTML = "<p>Waiting for " + getParameterByName("matchedWith") + " to ask the problem";
 }
+else {
+    document.getElementById("question-display").style.display = "none";
+}
 
 document.getElementById("question-display").style.visibility = "hidden";
 var connection = new signalR.HubConnectionBuilder().withUrl("/chat").build();
@@ -144,10 +147,17 @@ function getParameterByName(name, url) {
 document.getElementById("SubmitAnswer").addEventListener("click", function (event) {
     var guess = document.getElementById("RegexAnswer").value;
     if (regexString.localeCompare(guess) == 0) {
-        alert("Correct Answer");
+        var unorderListMatchString = document.getElementById("matcherStrings");
+        var point = Math.round(70 - 10 * Math.pow(unorderListMatchString.children.length, 1.2));
+        document.getElementById("Result").style.display = "block";
+        document.getElementById("Hint").style.display = "none";
+        document.getElementById("Points").innerText = "You win " + String(point) +" points";
     }
     else {
-        alert("wrong Answer");
+        document.getElementById("Result").style.display = "block";
+        document.getElementById("Points").style.display = "None";
+        document.getElementById("Hint").style.display = "block";
+        document.getElementById("Winner").innerText = "You are wrong. Try again or ask for more strings.";
     }
 });
 
@@ -157,6 +167,17 @@ document.getElementById("Hint").addEventListener("click", function (event) {
     connection.invoke("SendMessage", userId, JSON.stringify(askhint)).catch(function (err) {
         return console.error(err.toString());
     });
+});
+
+document.getElementById("Reset").addEventListener("click", function (event) {
+    document.getElementById("RegexString").value = "";
+    var unorderListMatchString = document.getElementById("matchStrings");
+    var totalStringsYet = unorderListMatchString.children.length;
+
+    for (var i = 1; i <= totalStringsYet; i++) {
+        document.getElementById("match" + String(i)).value = "";
+        document.getElementById("nomatch" + String(i)).value = "";
+    }
 });
 
 document.getElementById("SubmitRegex").addEventListener("click", function (event) {

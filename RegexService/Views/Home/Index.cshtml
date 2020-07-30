@@ -5,8 +5,41 @@
 
 <div class="row" id="global-div">
     <input type="text" id="playerName" placeholder="Enter your name" />
-    <button type="button" id="queueButton">Queue for a game</button>
+    <button type="button" id="queueButton">Queue for a random game</button>
+    <button type="button" id="queueAsker">Ask someone a problem </button>
+    <button type="button" id="queueResponder">Guess someone's regex string</button>
+    <p><span id="challengeAccept">Waiting for someone to accept the challenge</span></p>
 </div>
-
+<style>
+    p {
+        font-size:xx-large;
+        position: relative;
+        margin-top:30px;
+        margin-left:120px;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+        p span {
+            display: none;
+            background-color: antiquewhite;
+            font-weight: bolder;
+        }
+        button {
+        position: relative;
+        margin-top: 20px;
+        background-color: #bbbd4d;
+        font-size: 18px;
+    }
+    input {
+        background: none;
+        color: #807e7e;
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 320px;
+        border: solid;
+        border-radius: 0;
+        border-bottom: 1px solid #c6c6c6;
+    }
+</style>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
