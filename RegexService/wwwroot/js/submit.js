@@ -60,7 +60,13 @@ connection.on("ReceiveMessage", function (user, message) {
     if (msgtype == "query") {
         var matcherStrings = msg.matchString;
         var nomatcherStrings = msg.noMatchString;
-        window.regexString = String(msg.regexString);
+        var regexStr = String(msg.regexString);
+        if (!window.regexString || regexStr.localeCompare(regexString) != 0) {
+            document.getElementById("matcherStrings").innerHTML = "";
+            document.getElementById("nomatcherStrings").innerHTML = "";
+            window.regexString = regexStr;
+        }
+
         var unorderListMatchString = document.getElementById("matcherStrings");
         var unorderListnoMatchString = document.getElementById("nomatcherStrings");
         var totalStringsYet = unorderListMatchString.children.length;
@@ -173,10 +179,15 @@ document.getElementById("Reset").addEventListener("click", function (event) {
     document.getElementById("RegexString").value = "";
     var unorderListMatchString = document.getElementById("matchStrings");
     var totalStringsYet = unorderListMatchString.children.length;
+    var unorderListnoMatchString = document.getElementById("nomatchStrings");
 
     for (var i = 1; i <= totalStringsYet; i++) {
         document.getElementById("match" + String(i)).value = "";
         document.getElementById("nomatch" + String(i)).value = "";
+        if (i > 2) {
+            unorderListMatchString.removeChild(unorderListMatchString.children[i - 1]);
+            unorderListnoMatchString.removeChild(unorderListnoMatchString.children[i - 1]);
+        }
     }
 });
 
