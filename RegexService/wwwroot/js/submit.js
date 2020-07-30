@@ -71,10 +71,10 @@ connection.on("ReceiveMessage", function (user, message) {
         var unorderListnoMatchString = document.getElementById("nomatcherStrings");
         var totalStringsYet = unorderListMatchString.children.length;
 
-        for (var i = 1; i <= matcherStrings.length;i++) {
+        for (var i = 1; i <= matcherStrings.length; i++) {
             if (i > totalStringsYet) {
                 var li = document.createElement("li");
-                var x = document.createTextNode(matcherStrings[i-1]);
+                var x = document.createTextNode(matcherStrings[i - 1]);
                 x.id = "matcher" + String(totalStringsYet + 1);
                 li.appendChild(x);
                 unorderListMatchString.appendChild(li);
@@ -99,7 +99,7 @@ connection.on("ReceiveMessage", function (user, message) {
         var li = document.createElement("li");
         var x = document.createElement("INPUT");
         x.setAttribute("id", "match" + String(totalStringsYet + 1))
-        x.setAttribute("type", "text");   
+        x.setAttribute("type", "text");
         li.appendChild(x);
         unorderListMatchString.appendChild(li);
 
@@ -110,6 +110,13 @@ connection.on("ReceiveMessage", function (user, message) {
         x.setAttribute("type", "text");
         li.appendChild(x);
         unorderListnoMatchString.appendChild(li);
+    }
+    else if (msgtype == "solved") {
+        alert("Player " + user + " has guessed the string correctly. Please reset and ask another question or Click on home to queue again.")
+    }
+    else if (msgtype == "exception") {
+        alert(msg.error);
+        throw new error(msg.error);
     }
 });
 
@@ -162,6 +169,11 @@ document.getElementById("SubmitAnswer").addEventListener("click", function (even
         document.getElementById("Points").style.display = "block";
         document.getElementById("Points").innerText = "You win " + String(point) + " points";
         document.getElementById("Winner").innerText = "You Guessed it Right.";
+        var answered = new Object();
+        answered.type = "solved";
+        connection.invoke("SendMessage", userId, JSON.stringify(answered)).catch(function (err) {
+            return console.error(err.toString());
+        });
     }
     else {
         document.getElementById("Result").style.display = "block";

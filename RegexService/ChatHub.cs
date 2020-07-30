@@ -3,6 +3,8 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System;
 
 namespace RegexService.Hubs
 {
@@ -59,12 +61,73 @@ namespace RegexService.Hubs
                     }
                 }
             }
-            if (messageType == "query" || messageType == "hint")
+
+            if (messageType == "query")
+            {
+                JObject obj = JObject.Parse(message);
+                string regexString = obj.GetValue("regexString").ToString();
+                Regex regObj;
+
+                try
+                {
+                    regObj = new Regex(regexString);
+                }
+                catch (Exception ex)
+                {
+                    JObject excobj = GetJObjectWithMessageType("exception");
+                    excobj.Add("error", "Wrong Regex String. " + ex.Message);
+                    await Clients.Caller.SendAsync("ReceiveMessage", user, excobj.ToString());
+                    return;
+                }
+
+                List<string> matchStrings = obj.GetValue("matchString").ToObject<List<string>>();
+                HashSet<string> allStrings = new HashSet<string>();
+                foreach (string str in matchStrings)
+                {
+                    if (allStrings.Contains(str))
+                    {
+                        JObject excobj = GetJObjectWithMessageType("exception");
+                        excobj.Add("error", "Please give different strings for helping the guesser.");
+                        await Clients.Caller.SendAsync("ReceiveMessage", user, excobj.ToString());
+                        return;
+                    }
+                    if (!regObj.IsMatch(str))
+                    {
+                        JObject excobj = GetJObjectWithMessageType("exception");
+                        excobj.Add("error", "One of the strings do not match with the Regex");
+                        await Clients.Caller.SendAsync("ReceiveMessage", user, excobj.ToString());
+                        return;
+                    }
+                    allStrings.Add(str);
+                }
+                List<string> nomatchStrings = obj.GetValue("noMatchString").ToObject<List<string>>();
+                foreach (string str in nomatchStrings)
+                {
+                    if (allStrings.Contains(str))
+                    {
+                        JObject excobj = GetJObjectWithMessageType("exception");
+                        excobj.Add("error", "Please give different strings for helping the guesser.");
+                        await Clients.Caller.SendAsync("ReceiveMessage", user, excobj.ToString());
+                        return;
+                    }
+
+                    if (regObj.IsMatch(str))
+                    {
+                        JObject excobj = GetJObjectWithMessageType("exception");
+                        excobj.Add("error", "One of the strings matches with the Regex but should not match");
+                        await Clients.Caller.SendAsync("ReceiveMessage", user, excobj.ToString());
+                        return;
+                    }
+                    allStrings.Add(str);
+                }
+            }
+
+            if (messageType == "query" || messageType == "hint" || messageType == "solved")
             {
                 string matchedPlayer = MatchMaker.GetMatchedPlayer(user);
                 await Clients.Client(connectionList[matchedPlayer]).SendAsync("ReceiveMessage", user, message);
             }
-            
+
         }
 
         private JObject GetJObjectWithMessageType(string messageType)

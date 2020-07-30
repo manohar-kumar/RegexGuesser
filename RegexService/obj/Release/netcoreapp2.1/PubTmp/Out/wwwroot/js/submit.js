@@ -61,12 +61,12 @@ connection.on("ReceiveMessage", function (user, message) {
         var matcherStrings = msg.matchString;
         var nomatcherStrings = msg.noMatchString;
         var regexStr = String(msg.regexString);
-        if (!window.regexString || regexStr.localeCompare(regexString) != 0) {
+        if (window.regexString && regexStr.localeCompare(regexString) != 0) {
             document.getElementById("matcherStrings").innerHTML = "";
             document.getElementById("nomatcherStrings").innerHTML = "";
-            window.regexString = regexStr;
         }
 
+        window.regexString = regexStr;
         var unorderListMatchString = document.getElementById("matcherStrings");
         var unorderListnoMatchString = document.getElementById("nomatcherStrings");
         var totalStringsYet = unorderListMatchString.children.length;
@@ -87,6 +87,8 @@ connection.on("ReceiveMessage", function (user, message) {
             }
         }
 
+        document.getElementById("Result").style.display = "none";
+        document.getElementById("Hint").style.display = "block";
         document.getElementById("question-display").style.visibility = "visible";
         document.getElementById("question-portal").style.display = "none";
     }
@@ -157,7 +159,9 @@ document.getElementById("SubmitAnswer").addEventListener("click", function (even
         var point = Math.round(70 - 10 * Math.pow(unorderListMatchString.children.length, 1.2));
         document.getElementById("Result").style.display = "block";
         document.getElementById("Hint").style.display = "none";
-        document.getElementById("Points").innerText = "You win " + String(point) +" points";
+        document.getElementById("Points").style.display = "block";
+        document.getElementById("Points").innerText = "You win " + String(point) + " points";
+        document.getElementById("Winner").innerText = "You Guessed it Right.";
     }
     else {
         document.getElementById("Result").style.display = "block";
