@@ -84,7 +84,7 @@ namespace RegexService.Hubs
                 HashSet<string> allStrings = new HashSet<string>();
                 foreach (string str in matchStrings)
                 {
-                    if (allStrings.Contains(str))
+                    if ((regexString.Contains('*') || regexString.Contains('+') || regexString.Contains('.')) && allStrings.Contains(str))
                     {
                         JObject excobj = GetJObjectWithMessageType("exception");
                         excobj.Add("error", "Please give different strings for helping the guesser.");
@@ -103,7 +103,7 @@ namespace RegexService.Hubs
                 List<string> nomatchStrings = obj.GetValue("noMatchString").ToObject<List<string>>();
                 foreach (string str in nomatchStrings)
                 {
-                    if (allStrings.Contains(str))
+                    if ((regexString.Contains('*') || regexString.Contains('+') || regexString.Contains('.')) && allStrings.Contains(str))
                     {
                         JObject excobj = GetJObjectWithMessageType("exception");
                         excobj.Add("error", "Please give different strings for helping the guesser.");
