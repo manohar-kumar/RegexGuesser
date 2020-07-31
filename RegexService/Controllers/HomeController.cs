@@ -31,13 +31,6 @@ namespace RegexService.Controllers
             return View();
         }
 
-        public IActionResult GamePlay()
-        {
-            ViewData["Message"] = "Instructions";
-
-            return View();
-        }
-
         public IActionResult GameScreen()
         {
             ViewData["Message"] = "Your Game Screen.";
@@ -47,7 +40,7 @@ namespace RegexService.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Manohar Kumar";
+            ViewData["Message"] = "Instructions";
 
             return View();
         }

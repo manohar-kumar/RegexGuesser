@@ -122,7 +122,7 @@ namespace RegexService.Hubs
                 }
             }
 
-            if (messageType == "query" || messageType == "hint" || messageType == "solved")
+            if (messageType == "query" || messageType == "hint" || messageType == "endQuestion")
             {
                 string matchedPlayer = MatchMaker.GetMatchedPlayer(user);
                 await Clients.Client(connectionList[matchedPlayer]).SendAsync("ReceiveMessage", user, message);

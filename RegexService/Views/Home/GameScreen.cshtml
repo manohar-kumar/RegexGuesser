@@ -50,9 +50,15 @@
         </button>
     </p>
     <br />
-        <button type="button" id="Hint">
+    <div id="Hint">
+        <button type="button" id="HintBtn">
             Need Help, Ask For More Strings
         </button>
+        <button type="button" id="GiveUp">
+            I Give Up!
+        </button>
+    </div>
+
 </div>
 <div id="Result" style="font-size:larger;color:burlywood;background-color:dimgray;font-weight:bold;position:relative;margin-left:30px;margin-top:10px;display:none">
     <p id="Winner" style="position:relative; margin-left:30px;">You Guessed it Right.</p>
@@ -113,8 +119,15 @@
     #Hint {
         position: relative;
         margin-left: 100px;
+    }
+
+    #HintBtn, #GiveUp {
         background-color: #bbbd4d;
         font-size: 18px;
+    }
+    #GiveUp{
+        position:relative;
+        margin-left:20px;
     }
     #SubmitRegex{
         font-style:italic;

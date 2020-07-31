@@ -31,4 +31,3 @@ C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\RegexService.csproj.CopyComplete
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\GameScreen.g.cshtml.cs
-C:\Users\manokuma\source\repos\RegexService\RegexService\obj\Debug\netcoreapp2.1\Razor\Views\Home\GamePlay.g.cshtml.cs

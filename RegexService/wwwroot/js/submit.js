@@ -111,8 +111,13 @@ connection.on("ReceiveMessage", function (user, message) {
         li.appendChild(x);
         unorderListnoMatchString.appendChild(li);
     }
-    else if (msgtype == "solved") {
-        alert("Player " + user + " has guessed the string correctly. Please reset and ask another question or Click on home to queue again.")
+    else if (msgtype == "endQuestion") {
+        if (msg.outcome == "solved") {
+            alert("Player " + user + " has guessed the string correctly. Please reset and ask another question or Click on home to queue again.")
+        }
+        else if (msg.outcome == "giveUp") {
+            alert("Player " + user + " has given up. Please reset and ask another question or Click on home to queue again.")
+        }
     }
     else if (msgtype == "exception") {
         alert(msg.error);
@@ -170,7 +175,8 @@ document.getElementById("SubmitAnswer").addEventListener("click", function (even
         document.getElementById("Points").innerText = "You win " + String(point) + " points";
         document.getElementById("Winner").innerText = "You Guessed it Right.";
         var answered = new Object();
-        answered.type = "solved";
+        answered.type = "endQuestion";
+        answered.outcome = "solved";
         connection.invoke("SendMessage", userId, JSON.stringify(answered)).catch(function (err) {
             return console.error(err.toString());
         });
@@ -183,10 +189,22 @@ document.getElementById("SubmitAnswer").addEventListener("click", function (even
     }
 });
 
-document.getElementById("Hint").addEventListener("click", function (event) {
+document.getElementById("HintBtn").addEventListener("click", function (event) {
     var askhint = new Object();
     askhint.type = "hint";
     connection.invoke("SendMessage", userId, JSON.stringify(askhint)).catch(function (err) {
+        return console.error(err.toString());
+    });
+});
+
+document.getElementById("GiveUp").addEventListener("click", function (event) {
+    document.getElementById("Result").style.display = "block";
+    document.getElementById("Hint").style.display = "none";
+    document.getElementById("Winner").innerText = "Too tough eh!. The answer was '"+window.regexString + "'. \r\n Please wait for another question or go to home to queue again.";
+    var answered = new Object();
+    answered.type = "endQuestion";
+    answered.outcome = "giveUp";
+    connection.invoke("SendMessage", userId, JSON.stringify(answered)).catch(function (err) {
         return console.error(err.toString());
     });
 });
